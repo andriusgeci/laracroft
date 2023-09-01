@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
-    //use HasFactory;
-protected $someid = "";
+    use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'director_id',
+        'name',
+    ];
 }
 
-$department = Department::query()->create()

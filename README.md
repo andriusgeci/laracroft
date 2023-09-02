@@ -20,4 +20,3 @@ git clone https://github.com/andriusgeci/laracroft.git
 composer install
 TBD
 ```
-

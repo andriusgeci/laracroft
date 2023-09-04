@@ -18,7 +18,7 @@ class DepartmentController extends Controller
         return view('management.departments.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         Department::create([
             'user_id' => 1,
@@ -26,5 +26,11 @@ class DepartmentController extends Controller
             'name' => $request->name,
         ]);
         return redirect()->route('departmentsIndex');
+    }
+
+    public function edit($id)
+    {
+        $department = Department::find($id);
+        return view('management.departments.edit', compact($department));
     }
 }

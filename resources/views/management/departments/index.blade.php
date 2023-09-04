@@ -30,9 +30,16 @@
                             <td>{{$department->name}}</td>
                             <td>{{$department->director_id}}</td>
                             <td>
-                                <a href="{{ route('departmentsEdit', $department->id) }}" class="btn btn-success">
-                                    <i class="fa fa-edit"></i>
-                                </a>
+                                <div class="float-left mx-1">
+                                    <a href="{{ route('departmentsEdit', $department->id) }}" class="btn btn-success">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </div>
+                                <div class="float-left mx-1">
+                                    <a href="{{ route('departmentsDelete', $department->id) }}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

@@ -1,4 +1,5 @@
-<!doctype html>
+@php use Illuminate\Support\Facades\Session; @endphp
+    <!doctype html>
 <html lang="en">
 <head>
     <title>Laracroft</title>
@@ -85,6 +86,20 @@
                 </div>
             </div>
         </nav>
+
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                <p class="text-danger">
+                    {{ $error }}
+                </p>
+            @endforeach
+        @endif
+
+        @if(Session::has('success-message'))
+            <p class="text-success">
+                {{ Session::get('success-message') }}
+            </p>
+        @endif
 
         @yield('content')
 

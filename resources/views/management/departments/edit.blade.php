@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Create new Department</h1>
-    <form action="{{ route('departmentsStore') }}" method="POST">
+    <h1>Edit Department</h1>
+    <form action="{{ route('departmentsUpdate', $department->id) }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" name="name" value="{{ $department->name }}">
                 </div>
             </div>
             <div class="col-md-6">
@@ -16,8 +16,8 @@
                     <label for="director_id">Director</label>
                     <select name="director_id" class="form-control">
                         <option value="">Select a person</option>
-                        <option value="1">IT Director</option>
-                        <option value="2">HR Director</option>
+                        <option value="1" @if($department->director_id == '1') selected @endif>IT Director</option>
+                        <option value="2" @if($department->director_id == '2') selected @endif>HR Director</option>
                     </select>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success float-right">
-                        Save
+                        Update
                     </button>
                 </div>
             </div>

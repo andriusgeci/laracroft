@@ -10,7 +10,7 @@
 
 - [PHP 8+](https://www.php.net/manual/en/install.php)
 - Windows [Laragon](https://laragon.org/) (it's same as xampp only better)
-- Linux/Mac/Windows [Installation](https://laravel.com/docs/10.x/installation)
+- Linux/Mac/Windows [Installation](https://laravel.com/docs/10.x/sail#main-content) with Laravel Sail
 
 
 <a name="basic-installation"></a>

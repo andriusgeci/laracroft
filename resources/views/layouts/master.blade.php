@@ -19,11 +19,12 @@
     <nav id="sidebar">
         <div class="p-4 pt-5">
 
-                <img class="img logo rounded-circle mb-5" src="{{ asset('images/task_logo.png') }}" alt="logo">
+            <img class="img logo rounded-circle mb-5" src="{{ asset('images/task_logo.png') }}" alt="logo">
 
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="homeSubmenu">
+                    <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false"
+                       aria-controls="homeSubmenu">
                         Management <i class="fa fa-angle-down float-end mt-2"></i>
                     </a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -49,9 +50,9 @@
             <div class="footer">
                 <p>
                     Copyright &copy;
-                   2023 All rights reserved <i class="icon-heart" aria-hidden="true"></i> by <a
+                    2023 All rights reserved <i class="icon-heart" aria-hidden="true"></i> by <a
                         href="#" target="_blank">Laracroft Task Management</a>
-                    </p>
+                </p>
             </div>
 
         </div>
@@ -79,7 +80,11 @@
                             <a class="nav-link" href="#">Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Logout</a>
+                            <a class="nav-link" href="{{ 'logout' }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>

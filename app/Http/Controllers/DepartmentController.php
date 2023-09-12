@@ -13,7 +13,7 @@ class DepartmentController extends Controller
 {
     // Below code is related to vue.js crud. Will be using those instead of Laravel.
 
-    // Get All Departments from database.
+    // Get All Departments from database latest top to bottom.
     public function getDepartments()
     {
         return response()->json(Department::latest()->get());
@@ -60,8 +60,9 @@ class DepartmentController extends Controller
     // Landing view.
     public function index(): View
     {
-        $departmentsList = Department::all();
-        return view('management/departments/index', compact('departmentsList'));
+        // don't need this line because im loading it departments.vue
+        //$departmentsList = Department::all();
+        return view('management/departments/index');
     }
 
     // Create department view.

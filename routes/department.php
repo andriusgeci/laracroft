@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 // All Departments routes goes here.
 
 // Vue.js routing.
+
 Route::get('getDepartments', [DepartmentController::class, 'getDepartments']);
 Route::post('saveDepartment', [DepartmentController::class, 'saveDepartment']);
 Route::post('updateDepartment/{id}', [DepartmentController::class, 'updateDepartment']);

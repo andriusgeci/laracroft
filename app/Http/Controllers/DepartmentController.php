@@ -11,6 +11,52 @@ use Illuminate\Support\Facades\Session;
 
 class DepartmentController extends Controller
 {
+    // Below code is related to vue.js crud. Will be using those instead of Laravel.
+
+    // Get All Departments from database.
+    public function getDepartments()
+    {
+        return response()->json(Department::latest()->get());
+    }
+
+    // Update Department in database.
+    public function updateDepartment(Request $request, $id)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'director_id' => ['required'],
+        ]);
+
+        Department::where('id', $id)->update([
+            'name' => $request->name,
+            'director_id' => $request->director_id,
+        ]);
+    }
+
+    // Save department to the database.
+    public function saveDepartment(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'director_id' => ['required'],
+        ]);
+
+        Department::create([
+            'user_id' => 1,
+            'director_id' => $request->director_id,
+            'name' => $request->name,
+        ]);
+        return response()->json('success');
+    }
+
+    // Delete department from database.
+    public function deleteDepartment($id)
+    {
+        Department::where('id', $id)->delete();
+        return response()->json('success');
+    }
+
+    // Below code is related to laravel crud. Not used because I am using vue.js
     // Landing view.
     public function index(): View
     {
@@ -65,7 +111,7 @@ class DepartmentController extends Controller
     }
 
     // Delete department record from database.
-    public function delete( $id): RedirectResponse
+    public function delete($id): RedirectResponse
     {
         $department = Department::find($id);
         $department->delete();

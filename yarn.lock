@@ -1852,7 +1852,7 @@ autoprefixer@^10.4.0:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
-axios@^1.1.2:
+axios@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.5.0.tgz#f02e4af823e2e46a9768cfc74691fdd0517ea267"
   integrity sha512-D4DdjDo5CY50Qms0qGQTTw6Q44jl7zRwY7bthds06pUGfChBCTcQs+N743eFWGEd6pRTMd6A+I87aWyFV5wiZQ==
@@ -5378,6 +5378,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
+
+vform@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/vform/-/vform-2.1.2.tgz#4d52ccfb3f162de76d01ac6ce26d15693b6c8e65"
+  integrity sha512-Nobg/0ckWHYQAjJJqucOyRv/a3enO40f087KBpkSUCl0eRQTE8qmUqk/l5gmbxhD8UO3A8dDiSRWKmKF8+l4YQ==
 
 vite-plugin-full-reload@^1.0.5:
   version "1.0.5"

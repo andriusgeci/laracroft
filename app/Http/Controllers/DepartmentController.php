@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 
 class DepartmentController extends Controller
 {
@@ -34,11 +35,20 @@ class DepartmentController extends Controller
     }
 
     // Save department to the database.
+
+    /**
+     * @throws ValidationException
+     */
     public function saveDepartment(Request $request)
     {
-        $request->validate([
+        /*$request->validate([
             'name' => ['required'],
             'director_id' => ['required'],
+        ]);*/
+
+        $this->validate($request, [
+            'name' => 'required',
+            'director_id' => 'required',
         ]);
 
         Department::create([

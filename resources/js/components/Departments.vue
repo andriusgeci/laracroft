@@ -18,7 +18,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="(department, index) in departmentsList" :key="index">
+                            <tr v-for="(department, index) in departments" :key="index">
                                 <td>{{ index + 1 }}</td>
                                 <td>{{ department.name }}</td>
                                 <td>{{ department.director_id }}</td>
@@ -93,7 +93,6 @@ export default {
     data() {
         return {
             editMode: false,
-            departmentsList: {},
             departmentData: new Form({
                 id: '',
                 name: '',
@@ -102,22 +101,13 @@ export default {
         }
     },
     methods: {
-        getDepartments() {
-            axios.get('/department/getDepartments').then((response) => {
-                this.departmentsList = response.data
-            });
-        },
         createDepartment() {
             this.editMode = false
             this.departmentData.name = this.departmentData.director_id = ''
             $('#exampleModal').modal('show')
         },
         saveDepartment() {
-            this.departmentData.post('/department/saveDepartment', this.departmentData)
-                .then(() => {
-                    this.getDepartments()
-                    $('#exampleModal').modal('hide')
-                })
+            this.$store.dispatch('saveDepartment', this.departmentData)
         },
         editDepartment(department) {
             this.editMode = true
@@ -127,26 +117,22 @@ export default {
             $('#exampleModal').modal('show')
         },
         updateDepartment() {
-            this.departmentData.post('/department/updateDepartment/' + this.departmentData.id)
-                .then(() => {
-                    this.getDepartments()
-                    $('#exampleModal').modal('hide')
-                });
+            this.$store.dispatch('updateDepartment', this.departmentData)
         },
         deleteDepartment(department) {
-            if (confirm('Are you sure you want to delete department!')) {
-                axios.post('/department/deleteDepartment/' + department.id)
-                    .then(() => {
-                        this.getDepartments()
-                    });
-            }
+            this.$store.dispatch('deleteDepartment', department)
         },
         clearErrors() {
             this.departmentData.errors.clear()
         }
     },
     mounted() {
-        this.getDepartments()
+        this.$store.dispatch('getDepartments')
+    },
+    computed: {
+        departments() {
+            return this.$store.getters.departments
+        }
     }
 }
 </script>

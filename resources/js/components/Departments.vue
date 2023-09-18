@@ -4,7 +4,9 @@
             <div class="card">
                 <div class="card-header bg-dark">
                     <h5 class="float-start text-light">Departments List</h5>
-                    <button class="btn btn-success float-end" @click="createDepartment">New Department</button>
+                    <button class="btn btn-success float-end" @click="createDepartment"
+                            v-if="current_permissions.has('departments-create')">New Department
+                    </button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -14,7 +16,9 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Director</th>
-                                <th>Actions</th>
+                                <th v-if="current_permissions.has('departments-update') || current_permissions.has('departments_delete')">
+                                    Actions
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -22,7 +26,7 @@
                                 <td>{{ index + 1 }}</td>
                                 <td>{{ department.name }}</td>
                                 <td>{{ department.director_id }}</td>
-                                <td>
+                                <td v-if="current_permissions.has('departments-update') || current_permissions.has('departments_delete')">
                                     <button class="btn btn-success mx-1" @click="editDepartment(department)"><i
                                         class="fa fa-edit"></i></button>
                                     <button class="btn btn-danger mx-1" @click="deleteDepartment(department)"><i
@@ -90,6 +94,8 @@
 
 <script>
 export default {
+    // Properties returned from data() become reactive state
+    // and will be exposed on `this`.
     data() {
         return {
             editMode: false,
@@ -100,6 +106,8 @@ export default {
             }),
         }
     },
+    // Methods are functions that mutate state and trigger updates.
+    // They can be bound as event handlers in templates.
     methods: {
         createDepartment() {
             this.editMode = false
@@ -126,12 +134,22 @@ export default {
             this.departmentData.errors.clear()
         }
     },
+    // Lifecycle hooks are called at different stages
+    // of a component's lifecycle.
+    // This function will be called when the component is mounted.
     mounted() {
         this.$store.dispatch('getDepartments')
+        this.$store.dispatch('getAuthRolesAndPermissions')
     },
     computed: {
         departments() {
             return this.$store.getters.departments
+        },
+        current_roles() {
+            return this.$store.getters.current_roles
+        },
+        current_permissions() {
+            return this.$store.getters.current_permissions
         }
     }
 }

@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class DepartmentController extends Controller
 {
-    // Below code is related to vue.js crud. Will be using those instead of Laravel.
+    // Landing view.
+    public function index(): View
+    {
+        return view('management/departments/index');
+    }
 
     // Get All Departments from database latest top to bottom.
     public function getDepartments()
@@ -41,11 +42,6 @@ class DepartmentController extends Controller
      */
     public function saveDepartment(Request $request)
     {
-        /*$request->validate([
-            'name' => ['required'],
-            'director_id' => ['required'],
-        ]);*/
-
         $this->validate($request, [
             'name' => 'required',
             'director_id' => 'required',
@@ -65,69 +61,4 @@ class DepartmentController extends Controller
         Department::where('id', $id)->delete();
         return response()->json('success');
     }
-
-    // Below code is related to laravel crud. Not used because I am using vue.js
-    // Landing view.
-    public function index(): View
-    {
-        // don't need this line because im loading it departments.vue
-        //$departmentsList = Department::all();
-        return view('management/departments/index');
-    }
-
-    // Create department view.
-    public function create(): View
-    {
-        return view('management.departments.create');
-    }
-
-    // Store department to the database.
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required'],
-            'director_id' => ['required'],
-        ]);
-
-        Department::create([
-            'user_id' => 1,
-            'director_id' => $request->director_id,
-            'name' => $request->name,
-        ]);
-        Session::flash('success-message', 'Department created successfully!');
-        return redirect()->route('departmentsIndex');
-    }
-
-    // Edit department view.
-    public function edit($id): View
-    {
-        $department = Department::find($id);
-        return view('management.departments.edit', compact('department'));
-    }
-
-    // Update department in database.
-    public function update(Request $request, $id): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required'],
-            'director_id' => ['required'],
-        ]);
-
-        Department::where('id', $id)->update([
-            'director_id' => $request->director_id,
-            'name' => $request->name,
-        ]);
-        Session::flash('success-message', 'Department updated successfully!');
-        return redirect()->route('departmentsIndex');
-    }
-
-    // Delete department record from database.
-    public function delete($id): RedirectResponse
-    {
-        $department = Department::find($id);
-        $department->delete();
-        Session::flash('success-message', 'Department deleted successfully!');
-        return redirect()->route('departmentsIndex');
-    }
-
 }

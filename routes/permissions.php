@@ -4,6 +4,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('permissions/index', function () {
+Route::get('/index', function () {
     return view('management.permissions.index');
 })->name('permissionsIndex');

@@ -16,20 +16,19 @@ export default {
     },
     actions: {
         getDepartments: (context) => {
-            axios.get('/department/getDepartments').then((response) => {
+            axios.get('/departments/getDepartments').then((response) => {
                 context.commit('set_departments', response.data)
             });
-
         },
         saveDepartment: (context, departmentData) => {
-            departmentData.post('/department/saveDepartment')
+            departmentData.post('/departments/saveDepartment')
                 .then(() => {
                     $('#exampleModal').modal('hide')
                     context.dispatch('getDepartments')
                 });
         },
         updateDepartment: (context, departmentData) => {
-            departmentData.post('/department/updateDepartment/' + departmentData.id)
+            departmentData.post('/departments/updateDepartment/' + departmentData.id)
                 .then(() => {
                     $('#exampleModal').modal('hide')
                     context.dispatch('getDepartments')
@@ -37,7 +36,7 @@ export default {
         },
         deleteDepartment: (context, departmentData) => {
             if (confirm('Are you sure you want to delete department!')) {
-                axios.post('/department/deleteDepartment/' + departmentData.id)
+                axios.post('/departments/deleteDepartment/' + departmentData.id)
                     .then(() => {
                         $('#exampleModal').modal('hide')
                         context.dispatch('getDepartments')
